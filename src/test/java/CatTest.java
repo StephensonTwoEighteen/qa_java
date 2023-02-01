@@ -18,8 +18,16 @@ public class CatTest {
         Cat cat = new Cat(feline);
         String actual = cat.getSound();
         String expected = "Мяу";
+        System.out.println("Ожидаемый звук: " + expected);
+        System.out.println("Настоящий звук: " + actual);
         Assert.assertEquals(expected, actual);
-        System.out.println(actual);
     }
 
+    @Test
+    public void getFoodTest() {
+        Feline feline = new Feline();
+
+        Exception exception = Assert.assertThrows("Проверка исключения", Exception.class, ()-> feline.getFood("Млекопитающее"));
+        Assert.assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", exception.getMessage());
+    }
 }

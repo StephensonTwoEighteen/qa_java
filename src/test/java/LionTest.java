@@ -1,8 +1,6 @@
 import com.example.Animal;
 import com.example.Feline;
-import com.example.Kittens;
 import com.example.Lion;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -34,36 +32,40 @@ public class LionTest {
 
 
     @Mock
-    Kittens kittens;
+    Feline feline;
 
     @Test
     public void getKittensTest() {
 
-        Lion lion = new Lion(kittens);
+        Lion lion = new Lion(feline);
 
-        Mockito.when(kittens.getKittens()).thenReturn(0);
+        Mockito.when(feline.getKittens()).thenReturn(0);
         int expectedCount = 0;
         int actualCount = lion.getKittens();
         assertEquals(expectedCount, actualCount);
-        System.out.println(lion.getKittens());
+        System.out.println("Количество котят: " + lion.getKittens());
     }
-
-    @Mock
-    Feline feline;
 
     @Test
     public void getFoodTest() throws Exception {
         Lion lion = new Lion(feline);
+        Animal animal = new Animal();
 
+        Mockito.when(feline.getFood("Хищник")).thenReturn(animal.getFood("Хищник"));
         List<String> lionExpectedFood = List.of("Животные", "Птицы", "Рыба");
-        List<String> lionActualFood = lion.getFood("Хищник");
-        try {
-            lion.getFood("Хищник");
-        } catch (Exception exception) {
-            System.out.println("Неизвестный вид животного, используйте значение Травоядное или Хищник");
-        }
+        List<String> lionActualFood = lion.getFood();
+        System.out.println("Ожидаемый рацион: " + lionExpectedFood);
+        System.out.println(("Актуальный рацион: " + lionActualFood));
 
         assertEquals(lionExpectedFood, lionActualFood);
-
     }
 }
+
+
+
+
+
+
+
+
+

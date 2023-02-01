@@ -1,7 +1,5 @@
 import com.example.Animal;
-import com.example.Cat;
 import com.example.Feline;
-import com.example.Kittens;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +8,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FelineTest {
@@ -23,11 +23,13 @@ public class FelineTest {
         Mockito.when(animal.getFamily()).thenReturn("Существует несколько семейств: заячьи, беличьи, мышиные, кошачьи, псовые, медвежьи, куньи");
         String expectedFamily = animal.getFamily();
         String actualFamily = feline.getFamily();
-        expectedFamily.contains(actualFamily);
 
         System.out.println(expectedFamily);
-        System.out.println(actualFamily);
+        System.out.println("Относится к семейству: " + actualFamily);
+        Assert.assertTrue(expectedFamily.contains(actualFamily.toLowerCase()));
     }
+
+
 
     @Test
     public void getKittensTest(){
@@ -36,7 +38,7 @@ public class FelineTest {
         int expectedkittensCount = 1;
         int actualKittensCount = feline.getKittens(1);
 
-        Assert.assertEquals(expectedkittensCount, actualKittensCount);
+        assertEquals(expectedkittensCount, actualKittensCount);
     }
 
 
@@ -45,13 +47,18 @@ public class FelineTest {
         Feline feline = new Feline();
 
         List <String> expected = List.of("Животные", "Птицы", "Рыба");
-        try {
-            feline.eatMeat();
-        } catch (Exception exception) {
-            System.out.println("Неизвестный вид животного, используйте значение Травоядное или Хищник");
-        }
-        List<String> actual = feline.eatMeat();
-        Assert.assertEquals(expected, actual);
 
+        List<String> actual = feline.eatMeat();
+        assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+    public void eatMeatExceptionTest() {
+        Feline feline = new Feline();
+
+        Exception exception = Assert.assertThrows("Проверка исключения", Exception.class, ()-> feline.getFood("Млекопитающее"));
+        assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", exception.getMessage());
     }
 }
