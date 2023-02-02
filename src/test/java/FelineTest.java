@@ -1,27 +1,18 @@
-import com.example.Animal;
 import com.example.Feline;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(MockitoJUnitRunner.class)
 public class FelineTest {
-    @Mock
-    Animal animal;
 
     @Test
     public void getFamilyTest(){
         Feline feline = new Feline();
 
-        Mockito.when(animal.getFamily()).thenReturn("Существует несколько семейств: заячьи, беличьи, мышиные, кошачьи, псовые, медвежьи, куньи");
-        String expectedFamily = animal.getFamily();
+        String expectedFamily = "Существует несколько семейств: заячьи, беличьи, мышиные, кошачьи, псовые, медвежьи, куньи";
         String actualFamily = feline.getFamily();
 
         System.out.println(expectedFamily);

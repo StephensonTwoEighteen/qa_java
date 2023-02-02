@@ -21,11 +21,7 @@ public class LionTest {
 
         boolean expectedHasMane = true;
         boolean actualHasMane = lion.doesHaveMane();
-        try {
-            lion.doesHaveMane();
-        } catch (Exception exception) {
-            System.out.println("Используйте допустимые значения пола животного - самец или самка");
-        }
+
         assertEquals(expectedHasMane, actualHasMane);
         System.out.println(lion.doesHaveMane());
     }
